@@ -1,31 +1,210 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Installs and configures Snort IDS https://snort.org/
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+None
+
+Vagrant
+-------
+Spin up Environment under Vagrant to test.
+````
+vagrant up
+````
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+````
+---
+# defaults file for ansible-snort
+snort_blacklist_path: /etc/snort/rules
+snort_dynamic_library_rules: []
+  #- bad-traffic.rules
+  #- chat.rules
+  #- dos.rules
+  #- exploit.rules
+  #- icmp.rules
+  #- imap.rules
+  #- misc.rules
+  #- multimedia.rules
+  #- netbios.rules
+  #- nntp.rules
+  #- p2p.rules
+  #- smtp.rules
+  #- snmp.rules
+  #- specific-threats.rules
+  #- web-activex.rules
+  #- web-client.rules
+  #- web-iis.rules
+  #- web-misc.rules
+snort_external_net: '!$HOME_NET'  #define external networks..if snort_home_net is any then set this to any
+snort_home_net: 192.168.0.0/16  #define your home_net..if snort_external_net is any then set this to any
+snort_interface: eth0  #defines snort interface to listen on
+snort_oinkmaster_rules_url: http://rules.emergingthreats.net/open/suricata/emerging.rules.tar.gz
+snort_options: ''  #define additional snort options to pass to startup
+snort_preproc_rule_path: /etc/snort/preproc_rules
+snort_preproc_rules: []
+  #- preprocessor.rules
+  #- decoder.rules
+  #- sensitive-data.rules
+snort_rule_path: /etc/snort/rules
+snort_rules:
+  - local.rules
+  #- app-detect.rules
+  - attack-responses.rules
+  - backdoor.rules
+  - bad-traffic.rules
+  #- blacklist.rules
+  #- botnet-cnc.rules
+  #- browser-chrome.rules
+  #- browser-firefox.rules
+  #- browser-ie.rules
+  #- browser-other.rules
+  #- browser-plugins.rules
+  #- browser-webkit.rules
+  - chat.rules
+  - community-sql-injection.rules
+  - community-web-client.rules
+  - community-web-dos.rules
+  - community-web-iis.rules
+  - community-web-misc.rules
+  - community-web-php.rules
+  - community-sql-injection.rules
+  - community-web-client.rules
+  - community-web-dos.rules
+  - community-web-iis.rules
+  - community-web-misc.rules
+  - community-web-php.rules
+  #- content-replace.rules
+  - ddos.rules
+  - dns.rules
+  - dos.rules
+  - experimental.rules
+  #- exploit-kit.rules
+  - exploit.rules
+  #- file-executable.rules
+  #- file-flash.rules
+  #- file-identify.rules
+  #- file-image.rules
+  #- file-java.rules
+  #- file-multimedia.rules
+  #- file-office.rules
+  #- file-other.rules
+  #- file-pdf.rules
+  - finger.rules
+  - ftp.rules
+  - icmp-info.rules
+  - icmp.rules
+  - imap.rules
+  #- indicator-compromise.rules
+  #- indicator-obfuscation.rules
+  #- indicator-scan.rules
+  #- indicator-shellcode.rules
+  - info.rules
+  #- malware-backdoor.rules
+  #- malware-cnc.rules
+  #- malware-other.rules
+  #- malware-tools.rules
+  - misc.rules
+  - multimedia.rules
+  - mysql.rules
+  - netbios.rules
+  - nntp.rules
+  - oracle.rules
+  #- os-linux.rules
+  #- os-mobile.rules
+  #- os-other.rules
+  #- os-solaris.rules
+  #- os-windows.rules
+  - other-ids.rules
+  - p2p.rules
+  #- phishing-spam.rules
+  #- policy-multimedia.rules
+  #- policy-other.rules
+  - policy.rules
+  #- policy-social.rules
+  #- policy-spam.rules
+  - pop2.rules
+  - pop3.rules
+  #- protocol-dns.rules
+  #- protocol-finger.rules
+  #- protocol-ftp.rules
+  #- protocol-icmp.rules
+  #- protocol-imap.rules
+  #- protocol-nntp.rules
+  #- protocol-pop.rules
+  #- protocol-rpc.rules
+  #- protocol-scada.rules
+  #- protocol-services.rules
+  #- protocol-snmp.rules
+  #- protocol-telnet.rules
+  #- protocol-tftp.rules
+  #- protocol-voip.rules
+  #- pua-adware.rules
+  #- pua-other.rules
+  #- pua-p2p.rules
+  #- pua-toolbars.rules
+  - rpc.rules
+  - rservices.rules
+  #- scada.rules
+  - scan.rules
+  #- server-apache.rules
+  #- server-iis.rules
+  #- server-mail.rules
+  #- server-mssql.rules
+  #- server-mysql.rules
+  #- server-oracle.rules
+  #- server-other.rules
+  #- server-samba.rules
+  #- server-webapp.rules
+  #- shellcode.rules
+  - smtp.rules
+  - snmp.rules
+  #- specific-threats.rules
+  #- spyware-put.rules
+  - sql.rules
+  - telnet.rules
+  - tftp.rules
+  - virus.rules
+  #- voip.rules
+  #- web-activex.rules
+  - web-attacks.rules
+  - web-cgi.rules
+  - web-client.rules
+  - web-coldfusion.rules
+  - web-frontpage.rules
+  - web-iis.rules
+  - web-misc.rules
+  - web-php.rules
+  - x11.rules
+snort_so_rule_path: /etc/snort/so_rules
+snort_send_stats: true  #true/false
+snort_startup: boot
+snort_stats_threshold: 1
+snort_whitelist_path: /etc/snort/rules
+````
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
+###### Galaxy
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: mrlesmithjr.snort }
+
+###### GitHub
+    - hosts: servers
+      roles:
+        - { role: ansible-snort }
 
 License
 -------
@@ -35,4 +214,7 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Larry Smith Jr.
+- @mrlesmithjr
+- http://everythingshouldbevirtual.com
+- mrlesmithjr [at] gmail.com
