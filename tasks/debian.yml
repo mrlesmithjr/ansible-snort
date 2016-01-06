@@ -26,3 +26,12 @@
     group: root
     mode: 0600
   notify: restart snort
+
+- name: configuring snort
+  template:
+    src: "etc/snort/snort.conf.j2"
+    dest: "/etc/snort/snort.conf"
+    owner: root
+    group: root
+    mode: 0640
+  notify: restart snort
