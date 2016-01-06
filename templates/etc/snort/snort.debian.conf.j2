@@ -30,7 +30,7 @@ DEBIAN_SNORT_OPTIONS=""
 {% endif %}
 {% if snort_interface is defined %}
 DEBIAN_SNORT_INTERFACE="{{ snort_interface }}"
-{% elif snort_interface is not defined %
+{% elif snort_interface is not defined %}
 DEBIAN_SNORT_INTERFACE="eth0"
 {% endif %}
 {% if (snort_send_stats is defined and snort_send_stats) or snort_send_stats is not defined %}
