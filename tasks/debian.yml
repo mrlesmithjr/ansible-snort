@@ -29,6 +29,7 @@
     group: root
     mode: 0600
   notify: restart snort
+  when: ansible_lsb.major_release|int >= 14
 
 - name: debian | configuring snort
   template:
@@ -38,6 +39,7 @@
     group: root
     mode: 0640
   notify: restart snort
+  when: ansible_lsb.major_release|int >= 14
 
 - name: configuring oinkmaster
   template:

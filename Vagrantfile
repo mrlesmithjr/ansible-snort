@@ -7,7 +7,7 @@
 # you're doing.
 Vagrant.configure(2) do |config|
   config.vm.define "snort" do |snort|
-    snort.vm.box = "mrlesmithjr/trusty64"
+    snort.vm.box = "mrlesmithjr/precise64"
     snort.vm.hostname = "snort"
 
     snort.vm.network :private_network, ip: "192.168.202.201"
