@@ -2,7 +2,7 @@
 # defaults file for ansible-snort
 snort_home_net: 192.168.0.0/16  #define your home_net
 snort_interface: eth0  #defines snort interface to listen on
-snort_options: []  #define additional snort options to pass to startup
+snort_options: ''  #define additional snort options to pass to startup
 snort_send_stats: true  #true/false
 snort_startup: boot
 snort_stats_threshold: 1
