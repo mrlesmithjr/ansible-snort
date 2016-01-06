@@ -569,7 +569,9 @@ include reference.config
 
 # site specific rules
 {% for item in snort_rules %}
+{%   if item != "None" %}
 include $RULE_PATH/{{ item }}
+{%   endif %}
 {% endfor %}
 
 ###################################################
@@ -579,7 +581,9 @@ include $RULE_PATH/{{ item }}
 
 # decoder and preprocessor event rules
 {% for item in snort_preproc_rules %}
+{%   if item != "None" %}
 include $PREPROC_RULE_PATH/{{ item }}
+{%   endif %}
 {% endfor %}
 
 ###################################################
@@ -589,7 +593,9 @@ include $PREPROC_RULE_PATH/{{ item }}
 
 # dynamic library rules
 {% for item in snort_dynamic_library_rules %}
+{%   if item != "None" %}
 include $SO_RULE_PATH/{{ item }}
+{%   endif %}
 {% endfor %}
 
 # Event thresholding or suppression commands. See threshold.conf
