@@ -23,6 +23,7 @@ snort_dynamic_library_rules: []
 snort_external_net: '!$HOME_NET'  #define external networks..if snort_home_net is any then set this to any
 snort_home_net: 192.168.0.0/16  #define your home_net..if snort_external_net is any then set this to any
 snort_interface: eth0  #defines snort interface to listen on
+snort_oinkmaster_rules_url: http://rules.emergingthreats.net/open/suricata/emerging.rules.tar.gz
 snort_options: ''  #define additional snort options to pass to startup
 snort_preproc_rule_path: /etc/snort/preproc_rules
 snort_preproc_rules: []

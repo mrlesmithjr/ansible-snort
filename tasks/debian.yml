@@ -1,5 +1,5 @@
 ---
-- name: installing pre-reqs
+- name: debian | installing pre-reqs
   apt:
     name: "{{ item }}"
     state: present
@@ -13,12 +13,15 @@
     - libdumbnet-dev
     - zlib1g-dev
 
-- name: installing snort
+- name: debian | installing snort
   apt:
-    name: snort
+    name: "{{ item }}"
     state: present
+  with_items:
+    - oinkmaster
+    - snort
 
-- name: configuring snort daemon
+- name: debian | configuring snort daemon
   template:
     src: "etc/snort/snort.debian.conf.j2"
     dest: "/etc/snort/snort.debian.conf"
@@ -27,7 +30,7 @@
     mode: 0600
   notify: restart snort
 
-- name: configuring snort
+- name: debian | configuring snort
   template:
     src: "etc/snort/snort.conf.j2"
     dest: "/etc/snort/snort.conf"
@@ -35,3 +38,16 @@
     group: root
     mode: 0640
   notify: restart snort
+
+- name: configuring oinkmaster
+  template:
+    src: etc/oinkmaster.conf.j2
+    dest: /etc/oinkmaster.conf
+
+- name: configuring oinkmaster cron job
+  cron:
+    name: "oinkmaster rules update"
+    special_time: daily
+    user: "root"
+    job: "/usr/sbin/oinkmaster -C /etc/oinkmaster.conf -o {{ snort_rule_path }}"
+    cron_file: oinkmaster_rule_updates
