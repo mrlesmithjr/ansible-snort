@@ -7,6 +7,7 @@
     - build-essential
     - ethtool
     - flex
+    - iproute
     - libpcap-dev
     - libpcre3-dev
     - libdumbnet-dev
@@ -16,3 +17,12 @@
   apt:
     name: snort
     state: present
+
+- name: configuring snort daemon
+  template:
+    src: "etc/snort/snort.debian.conf.j2"
+    dest: "/etc/snort/snort.debian.conf"
+    owner: root
+    group: root
+    mode: 0600
+  notify: restart snort
