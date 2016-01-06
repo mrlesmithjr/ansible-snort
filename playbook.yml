@@ -1,0 +1,8 @@
+---
+- name: provisions snort
+  hosts: all
+  sudo: true
+  vars:
+  roles:
+    - { role: ansible-snort }
+  tasks:
