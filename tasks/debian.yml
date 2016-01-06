@@ -56,8 +56,8 @@
   file:
     dest: "/usr/lib/snort_dynamicrules"
     state: directory
-    owner: snort
-    group: snort
-    mode: 0700
+    owner: root 
+    group: root
+    mode: 0755
     recurse: yes
   when: ansible_distribution_release == "precise"
