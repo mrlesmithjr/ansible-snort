@@ -29,7 +29,6 @@
     group: root
     mode: 0600
   notify: restart snort
-  when: ansible_lsb.major_release|int >= 14
 
 - name: debian | configuring snort
   template:
@@ -39,7 +38,6 @@
     group: root
     mode: 0640
   notify: restart snort
-  when: ansible_lsb.major_release|int >= 14
 
 - name: configuring oinkmaster
   template:
@@ -53,3 +51,13 @@
     user: "root"
     job: "/usr/sbin/oinkmaster -C /etc/oinkmaster.conf -o {{ snort_rule_path }}"
     cron_file: oinkmaster_rule_updates
+
+- name: debian | ensuring directory exists (/usr/lib/snort_dynamicrules)
+  file:
+    dest: "/usr/lib/snort_dynamicrules"
+    state: directory
+    owner: snort
+    group: snort
+    mode: 0700
+    recurse: yes
+  when: ansible_distribution_release == "precise"
