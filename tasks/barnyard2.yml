@@ -103,11 +103,24 @@
     - 'archive'
     - 'snort'
 
+- name: barnyard2 | checking if MySQL DB schema imported
+  stat:
+    path: "/var/log/.db_schema_imported"
+  register: db_schema_imported
+
 - name: barnyard2 | importing MySQL DB Schema
   mysql_db:
     name: "snort"
     state: import
     target: "/tmp/create_mysql"
+  register: db_schema_import
+  when: not db_schema_imported.stat.exists
+
+- name: barnyard2 | marking MySQL DB schema as imported
+  file:
+    path: "/var/log/.db_schema_imported"
+    state: touch
+  when: db_schema_import.changed
 
 - name: barnyard2 | creating barnyard2 service
   template:
