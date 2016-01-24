@@ -74,6 +74,12 @@
     path: "/var/log/barnyard2"
     state: directory
 
+- name: barnyard2 | creating snort sid-msg.map
+  command: "./create-sidmap.pl /etc/snort/rules > /etc/snort/sid-msg.map"
+  args:
+    chdir: "/usr/share/oinkmaster/"
+    creates: "/etc/snort/sid-msg.map"
+
 - name: barnyard2 | copying MySQL schema
   copy:
     src: "create_mysql"
@@ -101,3 +107,17 @@
     name: "snort"
     state: import
     target: "/tmp/create_mysql"
+
+- name: barnyard2 | creating barnyard2 service
+  template:
+    src: "etc/init.d/barnyard2.j2"
+    dest: "/etc/init.d/barnyard2"
+    owner: root
+    group: root
+    mode: 0700
+
+- name: barnyard2 | starting and enabling barnyard2 service
+  service:
+    name: "barnyard2"
+    state: started
+    enabled: yes

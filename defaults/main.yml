@@ -7,7 +7,7 @@ snort_barnyard2_db_info:
   user: snort  #db user
 snort_barnyard2_enable: false  #defines if barnyard2 should be installed and configured
 snort_barnyard2_logdir: /var/log/snort
-snort_barnyard2_waldo_file: /var/log/snort/barnyard2.waldo
+snort_barnyard2_waldo_file: '{{ snort_barnyard2_logdir }}/barnyard2.waldo'
 snort_blacklist_path: /etc/snort/rules
 snort_daq_version: 2.0.6
 snort_dynamic_library_rules: []
