@@ -3,3 +3,6 @@
 
 - include: debian.yml
   when: ansible_os_family == "Debian"
+
+- include: barnyard2.yml
+  when: snort_barnyard2_enable is defined and snort_barnyard2_enable

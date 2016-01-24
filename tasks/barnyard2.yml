@@ -1,0 +1,6 @@
+---
+- name: barnyard2 | cloning barnyard2 repo
+  git:
+    repo: "https://github.com/firnsy/barnyard2"
+    dest: "/opt/barnyard2"
+    update: no

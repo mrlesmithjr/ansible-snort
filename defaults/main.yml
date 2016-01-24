@@ -1,5 +1,6 @@
 ---
 # defaults file for ansible-snort
+snort_barnyard2_enable: false  #defines if barnyard2 should be installed and configured
 snort_blacklist_path: /etc/snort/rules
 snort_dynamic_library_rules: []
   #- bad-traffic.rules
