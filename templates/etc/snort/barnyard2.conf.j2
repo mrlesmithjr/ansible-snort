@@ -71,7 +71,7 @@ config logdir: {{ snort_barnyard2_logdir }}
 #config hostname:   thor
 #config interface:  eth0
 config hostname: {{ ansible_hostname }}
-config interface {{ ansible_default_ipv4.interface }}
+config interface: {{ ansible_default_ipv4.interface }}
 
 # enable printing of the interface name when alerting.
 #
