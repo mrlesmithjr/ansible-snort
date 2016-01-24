@@ -15,3 +15,14 @@
     repo: "https://github.com/firnsy/barnyard2"
     dest: "/opt/barnyard2"
     update: no
+
+- name: barnyard2 | building barnyard2
+  command: "{{ item }}"
+  args:
+    chdir: "/opt/barnyard2"
+    creates: "/usr/local/bin/barnyard2"
+  with_items:
+    - './autogen.sh'
+    - './configure --with-mysql --with-mysql-libraries=/usr/lib/{{ ansible_machine }}-linux-gnu/'
+    - 'make'
+    - 'make install'
