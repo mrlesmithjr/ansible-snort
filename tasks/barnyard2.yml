@@ -5,21 +5,36 @@
     state: present
   with_items:
     - autoconf
+    - bison
+    - flex
+    - libdumbnet-dev
     - libmysqlclient-dev
+    - libpcap-dev
+    - libpcre3-dev
     - libtool
     - mysql-client
   when: ansible_os_family == "Debian"
 
+- name: barnyard2 | ensuring snort_src_dir exists
+  file:
+    path: "{{ snort_src_dir }}"
+    state: directory
+
+- name: barnyard2 | downloading snort daq
+  get_url:
+    url: "https://snort.org/downloads/snort/daq-{{ snort_daq_version }}.tar.gz"
+    dest: "{{ snort_src_dir }}/daq-{{ snort_daq_version }}.tar.gz"
+
 - name: barnyard2 | cloning barnyard2 repo
   git:
     repo: "https://github.com/firnsy/barnyard2"
-    dest: "/opt/barnyard2"
+    dest: "{{ snort_src_dir }}/barnyard2"
     update: no
 
 - name: barnyard2 | building barnyard2
   command: "{{ item }}"
   args:
-    chdir: "/opt/barnyard2"
+    chdir: "{{ snort_src_dir }}/barnyard2"
     creates: "/usr/local/bin/barnyard2"
   with_items:
     - './autogen.sh'
