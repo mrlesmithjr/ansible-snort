@@ -1,4 +1,14 @@
 ---
+- name: barnyard2 | installing pre-reqs
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - autoconf
+    - libmysqlclient-dev
+    - libtool
+    - mysql-client
+
 - name: barnyard2 | cloning barnyard2 repo
   git:
     repo: "https://github.com/firnsy/barnyard2"
