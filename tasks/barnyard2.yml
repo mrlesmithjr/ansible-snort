@@ -76,6 +76,7 @@
 
 - name: barnyard2 | creating snort sid-msg.map
   command: "./create-sidmap.pl /etc/snort/rules > /etc/snort/sid-msg.map"
+  ignore_errors: yes
   args:
     chdir: "/usr/share/oinkmaster/"
     creates: "/etc/snort/sid-msg.map"
