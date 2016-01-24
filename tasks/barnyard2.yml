@@ -36,6 +36,7 @@
   command: "{{ item }}"
   args:
     chdir: "{{ snort_src_dir }}/daq-{{ snort_daq_version }}"
+    creates: "/usr/local/lib/daq/daq_pcap.so"
   with_items:
     - './configure'
     - 'make'
@@ -55,5 +56,7 @@
   with_items:
     - './autogen.sh'
     - './configure --with-mysql --with-mysql-libraries=/usr/lib/{{ ansible_machine }}-linux-gnu/'
+    - 'ln -s /usr/include/dumbnet.h /usr/include/dnet.h'
+    - 'ldconfig'
     - 'make'
     - 'make install'
