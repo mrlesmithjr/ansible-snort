@@ -25,6 +25,12 @@
     url: "https://snort.org/downloads/snort/daq-{{ snort_daq_version }}.tar.gz"
     dest: "{{ snort_src_dir }}/daq-{{ snort_daq_version }}.tar.gz"
 
+- name: barnyard2 | extracting snort daq
+  unarchive:
+    copy: no
+    src: "{{ snort_src_dir }}/daq-{{ snort_daq_version }}.tar.gz"
+    dest: "{{ snort_src_dir }}/daq-{{ snort_daq_version }}"
+
 - name: barnyard2 | cloning barnyard2 repo
   git:
     repo: "https://github.com/firnsy/barnyard2"
