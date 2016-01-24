@@ -74,6 +74,17 @@
     path: "/var/log/barnyard2"
     state: directory
 
+- name: barnyard2 | checking if barnyard2 waldo file exists
+  stat:
+    path: "{{ snort_barnyard2_waldo_file }}"
+  register: barnyard2_waldo_file
+
+- name: barnyard2 | creating barnyard2_waldo_file
+  file:
+    path: "{{ barnyard2_waldo_file }}"
+    state: touch
+  when: not barnyard2_waldo_file.stat.exists
+
 - name: barnyard2 | creating snort sid-msg.map
   shell: "./create-sidmap.pl /etc/snort/rules > /etc/snort/sid-msg.map"
   ignore_errors: yes
