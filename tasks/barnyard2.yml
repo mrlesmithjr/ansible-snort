@@ -8,6 +8,7 @@
     - libmysqlclient-dev
     - libtool
     - mysql-client
+  when: ansible_os_family == "Debian"
 
 - name: barnyard2 | cloning barnyard2 repo
   git:
