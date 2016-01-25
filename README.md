@@ -21,7 +21,16 @@ Role Variables
 ````
 ---
 # defaults file for ansible-snort
+snort_barnyard2_db_info:
+  host: localhost  #db host
+  name: snort  #db name
+  pass: snort  #db password
+  user: snort  #db user
+snort_barnyard2_enable: false  #defines if barnyard2 should be installed and configured
+snort_barnyard2_logdir: /var/log/snort
+snort_barnyard2_waldo_file: '{{ snort_barnyard2_logdir }}/barnyard2.waldo'
 snort_blacklist_path: /etc/snort/rules
+snort_daq_version: 2.0.6
 snort_dynamic_library_rules: []
   #- bad-traffic.rules
   #- chat.rules
@@ -183,6 +192,7 @@ snort_rules:
   - x11.rules
 snort_so_rule_path: /etc/snort/so_rules
 snort_send_stats: true  #true/false
+snort_src_dir: /opt/snort_src  #defines where to download source packages to compile
 snort_startup: boot
 snort_stats_threshold: 1
 snort_whitelist_path: /etc/snort/rules
