@@ -81,7 +81,7 @@
 
 - name: barnyard2 | creating barnyard2_waldo_file
   file:
-    path: "{{ barnyard2_waldo_file }}"
+    path: "{{ snort_barnyard2_waldo_file }}"
     state: touch
   when: not barnyard2_waldo_file.stat.exists
 
