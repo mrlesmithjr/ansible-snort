@@ -100,7 +100,7 @@ url= {{ snort_oinkmaster_rules_url }}
 # contains the Cygwin binaries and not the native Win32 binaries or
 # you will get problems.
 # The following UNIX style path is assumed by default:
-# path = /bin:/usr/bin:/usr/local/bin
+path = /bin:/usr/bin:/usr/local/bin
 
 # Example if running native Win32 or standalone Cygwin:
 # path = c:\oinkmaster;c:\oinkmaster\bin
@@ -151,7 +151,7 @@ url= {{ snort_oinkmaster_rules_url }}
 # All other files will be ignored. You can then choose to skip
 # individual files by specifying the "skipfile" keyword below.
 # Normally you shouldn't need to change this one.
-# update_files = \.rules$|\.config$|\.conf$|\.txt$|\.map$
+update_files = \.rules$|\.config$|\.conf$|\.txt$|\.map$
 
 
 # Regexp of keywords that starts a Snort rule.

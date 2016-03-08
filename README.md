@@ -27,41 +27,15 @@ snort_barnyard2_db_info:
   pass: snort  #db password
   user: snort  #db user
 snort_barnyard2_enable: false  #defines if barnyard2 should be installed and configured
-snort_barnyard2_logdir: /var/log/snort
+snort_barnyard2_logdir: '/var/log/snort'
 snort_barnyard2_waldo_file: '{{ snort_barnyard2_logdir }}/barnyard2.waldo'
-snort_blacklist_path: /etc/snort/rules
+snort_community_rules_package: 'community-rules.tar.gz'
+snort_community_rules_url: 'https://snort.org/downloads/community'
+snort_config_oinkmaster: true  #defines if oinkmaster should be configured
+snort_config_snort: true  #defines if snort should be configured
+snort_blacklist_path: '/etc/snort/rules'
 snort_daq_version: 2.0.6
-snort_dynamic_library_rules: []
-  #- bad-traffic.rules
-  #- chat.rules
-  #- dos.rules
-  #- exploit.rules
-  #- icmp.rules
-  #- imap.rules
-  #- misc.rules
-  #- multimedia.rules
-  #- netbios.rules
-  #- nntp.rules
-  #- p2p.rules
-  #- smtp.rules
-  #- snmp.rules
-  #- specific-threats.rules
-  #- web-activex.rules
-  #- web-client.rules
-  #- web-iis.rules
-  #- web-misc.rules
-snort_external_net: '!$HOME_NET'  #define external networks..if snort_home_net is any then set this to any
-snort_home_net: 192.168.0.0/16  #define your home_net..if snort_external_net is any then set this to any
-snort_interface: eth0  #defines snort interface to listen on
-snort_oinkmaster_rules_url: http://rules.emergingthreats.net/open/suricata/emerging.rules.tar.gz
-snort_options: ''  #define additional snort options to pass to startup
-snort_preproc_rule_path: /etc/snort/preproc_rules
-snort_preproc_rules: []
-  #- preprocessor.rules
-  #- decoder.rules
-  #- sensitive-data.rules
-snort_rule_path: /etc/snort/rules
-snort_rules:
+snort_debian_rules:  #These rules are installed by default on Debian
   - local.rules
   #- app-detect.rules
   - attack-responses.rules
@@ -190,12 +164,104 @@ snort_rules:
   - web-misc.rules
   - web-php.rules
   - x11.rules
-snort_so_rule_path: /etc/snort/so_rules
+snort_dynamic_library_rules: []
+  #- bad-traffic.rules
+  #- chat.rules
+  #- dos.rules
+  #- exploit.rules
+  #- icmp.rules
+  #- imap.rules
+  #- misc.rules
+  #- multimedia.rules
+  #- netbios.rules
+  #- nntp.rules
+  #- p2p.rules
+  #- smtp.rules
+  #- snmp.rules
+  #- specific-threats.rules
+  #- web-activex.rules
+  #- web-client.rules
+  #- web-iis.rules
+  #- web-misc.rules
+snort_external_net: '!$HOME_NET'  #define external networks..if snort_home_net is any then set this to any
+snort_fedora_package: 'https://www.snort.org/downloads/snort/snort-{{ snort_version }}-1.f21.x86_64.rpm'
+snort_fedora_daq_package: 'https://www.snort.org/downloads/snort/daq-{{ snort_daq_version }}-1.f21.x86_64.rpm'
+snort_home_net: 192.168.0.0/16  #define your home_net..if snort_external_net is any then set this to any
+snort_interface: '{{ ansible_default_ipv4.interface }}'  #defines snort interface to listen on
+snort_oinkmaster_dl_package: 'oinkmaster-2.0.tar.gz'
+snort_oinkmaster_dl_url: 'http://prdownloads.sourceforge.net/oinkmaster'
+snort_oinkmaster_rules_url: 'http://rules.emergingthreats.net/open/suricata/emerging.rules.tar.gz'
+snort_options: ''  #define additional snort options to pass to startup
+snort_preproc_rule_path: '/etc/snort/preproc_rules'
+snort_preproc_rules: []
+  #- preprocessor.rules
+  #- decoder.rules
+  #- sensitive-data.rules
+snort_redhat_daq_package: 'https://www.snort.org/downloads/snort/daq-{{ snort_daq_version }}-1.centos7.x86_64.rpm'
+snort_redhat_package: 'https://www.snort.org/downloads/snort/snort-{{ snort_version }}-1.centos7.x86_64.rpm'
+snort_redhat_rules:  #defines rules downloaded from emerging threats using oinkmaster
+  - community-rules/community.rules
+#  - botcc.portgrouped.rules
+  - botcc.rules
+#  - ciarmy.rules
+  - compromised.rules
+#  - decoder-events.rules
+#  - drop.rules
+  - dshield.rules
+#  - emerging-activex.rules
+#  - emerging-attack_response.rules
+#  - emerging-chat.rules
+#  - emerging-current_events.rules
+#  - emerging-deleted.rules
+#  - emerging-dns.rules
+#  - emerging-dos.rules
+#  - emerging-exploit.rules
+#  - emerging-ftp.rules
+#  - emerging-games.rules
+#  - emerging-icmp_info.rules
+#  - emerging-icmp.rules
+#  - emerging-imap.rules
+#  - emerging-inappropriate.rules
+#  - emerging-info.rules
+#  - emerging-malware.rules
+#  - emerging-misc.rules
+#  - emerging-mobile_malware.rules
+#  - emerging-netbios.rules
+#  - emerging-p2p.rules
+#  - emerging-policy.rules
+#  - emerging-pop3.rules
+#  - emerging-rpc.rules
+#  - emerging-scada.rules
+#  - emerging-scan.rules
+#  - emerging-shellcode.rules
+#  - emerging-smtp.rules
+#  - emerging-snmp.rules
+#  - emerging-sql.rules
+#  - emerging-telnet.rules
+#  - emerging-tftp.rules
+#  - emerging-trojan.rules
+#  - emerging-user_agents.rules
+#  - emerging-voip.rules
+#  - emerging-web_client.rules
+#  - emerging-web_server.rules
+#  - emerging-web_specific_apps.rules
+#  - emerging-worm.rules
+#  - files.rules
+#  - http-events.rules
+#  - rbn-malvertisers.rules
+#  - rbn.rules
+#  - smtp-events.rules
+#  - stream-events.rules
+#  - tls-events.rules
+#  - tor.rules
+snort_rule_path: '/etc/snort/rules'
+snort_so_rule_path: '/etc/snort/so_rules'
 snort_send_stats: true  #true/false
-snort_src_dir: /opt/snort_src  #defines where to download source packages to compile
+snort_src_dir: '/opt/snort_src'  #defines where to download source packages to compile
 snort_startup: boot
 snort_stats_threshold: 1
-snort_whitelist_path: /etc/snort/rules
+snort_version: 2.9.8.0
+snort_whitelist_path: '/etc/snort/rules'
 ````
 
 Dependencies
@@ -205,16 +271,15 @@ None
 
 Example Playbook
 ----------------
-
-###### Galaxy
-    - hosts: servers
-      roles:
-         - { role: mrlesmithjr.snort }
-
-###### GitHub
-    - hosts: servers
-      roles:
-        - { role: ansible-snort }
+````
+---
+- hosts: all
+  become: true
+  vars:
+  roles:
+    - role: ansible-snort
+  tasks:
+````
 
 License
 -------

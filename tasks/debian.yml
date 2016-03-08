@@ -30,34 +30,14 @@
     mode: 0600
   notify: restart snort
 
-- name: debian | configuring snort
-  template:
-    src: "etc/snort/snort.conf.j2"
-    dest: "/etc/snort/snort.conf"
-    owner: root
-    group: root
-    mode: 0640
-  notify: restart snort
-
-- name: configuring oinkmaster
-  template:
-    src: etc/oinkmaster.conf.j2
-    dest: /etc/oinkmaster.conf
-
-- name: configuring oinkmaster cron job
-  cron:
-    name: "oinkmaster rules update"
-    special_time: daily
-    user: "root"
-    job: "/usr/sbin/oinkmaster -C /etc/oinkmaster.conf -o {{ snort_rule_path }}"
-    cron_file: oinkmaster_rule_updates
-
 - name: debian | ensuring directory exists (/usr/lib/snort_dynamicrules)
   file:
     dest: "/usr/lib/snort_dynamicrules"
     state: directory
-    owner: root 
+    owner: root
     group: root
     mode: 0755
     recurse: yes
-  when: ansible_distribution_release == "precise"
+  when: >
+        ansible_distribution_release == "precise" or
+        ansible_distribution_release == "wheezy"

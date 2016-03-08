@@ -254,13 +254,25 @@ config paf_max: 16000
 ###################################################
 
 # path to dynamic preprocessor libraries
+{% if ansible_os_family == "Debian" %}
 dynamicpreprocessor directory /usr/lib/snort_dynamicpreprocessor/
+{% elif ansible_os_family == "RedHat" %}
+dynamicpreprocessor directory /usr/lib64/snort-{{ snort_version }}_dynamicpreprocessor/
+{% endif %}
 
 # path to base preprocessor engine
+{% if ansible_os_family == "Debian" %}
 dynamicengine /usr/lib/snort_dynamicengine/libsf_engine.so
+{% elif ansible_os_family == "RedHat" %}
+dynamicengine /usr/lib64/snort-{{ snort_version }}_dynamicengine/libsf_engine.so
+{% endif %}
 
 # path to dynamic rules libraries
+{% if ansible_os_family == "Debian" %}
 dynamicdetection directory /usr/lib/snort_dynamicrules
+{% elif ansible_os_family == "RedHat" %}
+dynamicdetection directory /usr/local/lib/snort_dynamicrules
+{% endif %}
 
 ###################################################
 # Step #5: Configure preprocessors
@@ -568,11 +580,19 @@ include reference.config
 # directory)
 
 # site specific rules
-{% for item in snort_rules %}
-{%   if item != "None" %}
+{% if ansible_os_family == "Debian" %}
+{%   for item in snort_debian_rules %}
+{%     if item != "None" %}
 include $RULE_PATH/{{ item }}
-{%   endif %}
-{% endfor %}
+{%     endif %}
+{%   endfor %}
+{% elif ansible_os_family == "RedHat" %}
+{%   for item in snort_redhat_rules %}
+{%     if item != "None" %}
+include rules/{{ item }}
+{%     endif %}
+{%   endfor %}
+{% endif %}
 
 ###################################################
 # Step #8: Customize your preprocessor and decoder alerts

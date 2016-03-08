@@ -3,5 +3,10 @@
 
 - name: restart snort
   service:
-    name: snort
+    name: "snort"
+    state: restarted
+
+- name: restart snortd
+  service:
+    name: "snortd"
     state: restarted
