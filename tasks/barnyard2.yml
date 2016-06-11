@@ -109,6 +109,8 @@
   file:
     path: "{{ snort_barnyard2_waldo_file }}"
     state: touch
+    owner: snort
+    group: snort
   when: not barnyard2_waldo_file.stat.exists
 
 - name: barnyard2 | creating snort sid-msg.map

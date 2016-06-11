@@ -545,7 +545,11 @@ preprocessor dnp3: ports { 20000 } \
 # unified2
 # Recommended for most installs
 # output unified2: filename merged.log, limit 128, nostamp, mpls_event_types, vlan_event_types
+{% if not snort_barnyard2_enable %}
 output unified2: filename snort.log, limit 128, nostamp, mpls_event_types, vlan_event_types
+{% elif snort_barnyard2_enable %}
+output unified2: filename snort.log, limit 128
+{% endif %}
 
 # Additional configuration for specific types of installs
 # output alert_unified2: filename snort.alert, limit 128, nostamp
