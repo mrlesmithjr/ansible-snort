@@ -26,6 +26,7 @@ snort_barnyard2_db_info:
   name: snort  #db name
   pass: snort  #db password
   user: snort  #db user
+snort_barnyard2_db_type: mysql  #defines the DB type...options are mysql or mariadb
 snort_barnyard2_enable: false  #defines if barnyard2 should be installed and configured
 snort_barnyard2_logdir: '/var/log/snort'
 snort_barnyard2_waldo_file: '{{ snort_barnyard2_logdir }}/barnyard2.waldo'
@@ -260,7 +261,7 @@ snort_send_stats: true  #true/false
 snort_src_dir: '/opt/snort_src'  #defines where to download source packages to compile
 snort_startup: boot
 snort_stats_threshold: 1
-snort_version: 2.9.8.0
+snort_version: 2.9.8.2
 snort_whitelist_path: '/etc/snort/rules'
 ````
 
