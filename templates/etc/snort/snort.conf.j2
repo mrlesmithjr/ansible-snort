@@ -553,6 +553,9 @@ output unified2: filename snort.log, limit 128, nostamp, mpls_event_types, vlan_
 
 # syslog
 # output alert_syslog: LOG_AUTH LOG_ALERT
+{% if snort_output_syslog %}
+output alert_syslog: LOG_AUTH LOG_ALERT
+{% endif %}
 
 # pcap
 # output log_tcpdump: tcpdump.log

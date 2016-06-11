@@ -193,6 +193,7 @@ snort_oinkmaster_dl_package: 'oinkmaster-2.0.tar.gz'
 snort_oinkmaster_dl_url: 'http://prdownloads.sourceforge.net/oinkmaster'
 snort_oinkmaster_rules_url: 'http://rules.emergingthreats.net/open/suricata/emerging.rules.tar.gz'
 snort_options: ''  #define additional snort options to pass to startup
+snort_output_syslog: false  #defines if alerts should be sent to syslog
 snort_preproc_rule_path: '/etc/snort/preproc_rules'
 snort_preproc_rules: []
   #- preprocessor.rules
