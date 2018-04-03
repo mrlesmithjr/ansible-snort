@@ -1,26 +1,9 @@
 ---
 - name: redhat | installing pre-reqs
-  yum:
+  package:
     name: "{{ item }}"
     state: present
-  with_items:
-    - libpcap
-    - libpcap-devel
-    - perl
-    - tcpdump
-  when: ansible_distribution != "Fedora"
-
-- name: redhat | installing pre-reqs
-  dnf:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - libpcap
-    - libpcap-devel
-    - perl
-    - tcpdump
-    - wget
-  when: ansible_distribution == "Fedora"
+  with_items: "{{ snort_redhat_prereqs }}"
 
 - name: redhat | installing snort daq
   yum:
