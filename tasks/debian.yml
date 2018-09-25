@@ -1,9 +1,27 @@
----
 - name: debian | updating apt-cache
   apt:
     update_cache: true
     cache_valid_time: 86400
   become: true
+
+- name: debian | Installing iproute
+  apt:
+    name: iproute
+    state: present
+  become: true
+  when: >
+    ansible_distribution != "Ubuntu" or
+    (ansible_distribution == "Ubuntu" and
+    ansible_distribution_major_version < "18")
+
+- name: debian | Installing iproute2
+  apt:
+    name: iproute2
+    state: present
+  become: true
+  when: >
+    ansible_distribution == "Ubuntu" and
+    ansible_distribution_major_version >= "18"
 
 - name: debian | installing pre-reqs
   apt:
@@ -14,7 +32,6 @@
     - build-essential
     - ethtool
     - flex
-    - iproute
     - libpcap-dev
     - libpcre3-dev
     - libdumbnet-dev
@@ -51,5 +68,5 @@
     recurse: yes
   become: true
   when: >
-        ansible_distribution_release == "precise" or
-        ansible_distribution_release == "wheezy"
+    ansible_distribution_release == "precise" or
+    ansible_distribution_release == "wheezy"
