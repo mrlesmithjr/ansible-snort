@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: Larry Smith Jr.
   description: Installs and configures Snort IDS https://snort.org/
@@ -33,7 +34,7 @@ galaxy_info:
         - wheezy
         - stretch
 
-  categories:
+  galaxy_tags:
     - monitoring
     - networking
     - system
