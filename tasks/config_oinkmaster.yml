@@ -65,7 +65,8 @@
 
 - name: config_oinkmaster | pulling initial rules
   command: "/etc/oinkmaster/oinkmaster.pl -C /etc/oinkmaster/oinkmaster.conf -o {{ snort_rule_path }}"
-  args:
-    creates: "{{ snort_rule_path }}/emerging.conf"
+  # args:
+  #   creates: "{{ snort_rule_path }}/emerging.conf"
   become: true
+  changed_when: false
   when: ansible_os_family == "RedHat"
