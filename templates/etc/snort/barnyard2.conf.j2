@@ -6,7 +6,7 @@ config gen_file:            /etc/snort/gen-msg.map
 config sid_file:            /etc/snort/sid-msg.map
 config logdir: {{ snort_barnyard2_logdir }}
 config hostname: {{ ansible_hostname }}
-config interface: {{ ansible_default_ipv4.interface }}
+config interface: {{ ansible_default_ipv4.interface|default(ansible_interfaces|snort_interface) }}
 config daemon
 config waldo_file: {{ snort_barnyard2_waldo_file }}
 
