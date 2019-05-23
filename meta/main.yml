@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: Larry Smith Jr.
   description: Installs and configures Snort IDS https://snort.org/
@@ -13,18 +14,27 @@ galaxy_info:
       versions:
         - 22
         - 23
+        - 24
+        - 25
+        - 26
+        - 27
+        - 28
+        - 29
     - name: Ubuntu
       versions:
         - bionic
+        - dingo
         - precise
         - trusty
         - vivid
         - xenial
     - name: Debian
       versions:
+        - jessie
         - wheezy
+        - stretch
 
-  categories:
+  galaxy_tags:
     - monitoring
     - networking
     - system

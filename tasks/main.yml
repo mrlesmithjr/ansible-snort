@@ -1,17 +1,17 @@
 ---
 # tasks file for ansible-snort
 
-- include: debian.yml
+- include_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
-- include: redhat.yml
+- include_tasks: redhat.yml
   when: ansible_os_family == "RedHat"
 
-- include: config_snort.yml
-  when: snort_config_snort
+- include_tasks: config_snort.yml
+  when: snort_config_snort|bool
 
-- include: config_oinkmaster.yml
-  when: snort_config_oinkmaster
+- include_tasks: config_oinkmaster.yml
+  when: snort_config_oinkmaster|bool
 
-- include: barnyard2.yml
-  when: snort_barnyard2_enable
+- include_tasks: barnyard2.yml
+  when: snort_barnyard2_enable|bool

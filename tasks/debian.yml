@@ -1,3 +1,4 @@
+---
 - name: debian | updating apt-cache
   apt:
     update_cache: true
@@ -9,6 +10,8 @@
     name: iproute
     state: present
   become: true
+  register: result
+  until: result is successful
   when: >
     ansible_distribution != "Ubuntu" or
     (ansible_distribution == "Ubuntu" and
@@ -19,34 +22,31 @@
     name: iproute2
     state: present
   become: true
+  register: result
+  until: result is successful
   when: >
     ansible_distribution == "Ubuntu" and
     ansible_distribution_major_version >= "18"
 
 - name: debian | installing pre-reqs
   apt:
-    name: "{{ item }}"
+    name: "{{ snort_debian_pre_reqs }}"
     state: present
   become: true
-  with_items:
-    - build-essential
-    - ethtool
-    - flex
-    - libpcap-dev
-    - libpcre3-dev
-    - libdumbnet-dev
-    - zlib1g-dev
+  register: result
+  until: result is successful
 
 - name: debian | installing snort
   apt:
-    name: "{{ item }}"
+    name: ["oinkmaster", "snort"]
     state: present
+  environment:
+    RUNLEVEL: 1
   become: true
   # We need to skip errors as Snort tries to start and is not configured yet
   ignore_errors: true
-  with_items:
-    - oinkmaster
-    - snort
+  register: result
+  until: result is successful
 
 - name: debian | configuring snort daemon
   template:

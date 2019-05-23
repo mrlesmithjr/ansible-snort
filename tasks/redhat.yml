@@ -1,10 +1,9 @@
 ---
 - name: redhat | installing pre-reqs
   package:
-    name: "{{ item }}"
+    name: "{{ snort_redhat_prereqs }}"
     state: present
   become: true
-  with_items: "{{ snort_redhat_prereqs }}"
 
 - name: redhat | installing snort daq
   yum:

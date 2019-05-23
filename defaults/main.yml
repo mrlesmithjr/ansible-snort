@@ -13,11 +13,22 @@ snort_barnyard2_db_info:
 # Defines the DB type...options are mysql or mariadb
 snort_barnyard2_db_type: mysql
 
+snort_barnyard2_debian_pre_reqs:
+  - autoconf
+  - bison
+  - flex
+  - git
+  - libdumbnet-dev
+  - libpcap-dev
+  - libpcre3-dev
+  - libtool
+  - mysql-client
+
 # Defines if barnyard2 should be installed and configured
 snort_barnyard2_enable: false
 
 snort_barnyard2_logdir: /var/log/snort
-snort_barnyard2_waldo_file: '{{ snort_barnyard2_logdir }}/barnyard2.waldo'
+snort_barnyard2_waldo_file: "{{ snort_barnyard2_logdir }}/barnyard2.waldo"
 snort_community_rules_package: community-rules.tar.gz
 snort_community_rules_url: https://snort.org/downloads/community
 
@@ -29,6 +40,15 @@ snort_config_snort: true
 
 snort_blacklist_path: /etc/snort/rules
 snort_daq_version: 2.0.6
+
+snort_debian_pre_reqs:
+  - build-essential
+  - ethtool
+  - flex
+  - libpcap-dev
+  - libpcre3-dev
+  - libdumbnet-dev
+  - zlib1g-dev
 
 # These rules are installed by default on Debian
 snort_debian_rules:
@@ -161,7 +181,8 @@ snort_debian_rules:
   - web-php.rules
   - x11.rules
 
-snort_dynamic_library_rules: []
+snort_dynamic_library_rules:
+  []
   #- bad-traffic.rules
   #- chat.rules
   #- dos.rules
@@ -182,30 +203,31 @@ snort_dynamic_library_rules: []
   #- web-misc.rules
 
 # Define external networks..if snort_home_net is any then set this to any
-snort_external_net: '!$HOME_NET'
+snort_external_net: "!$HOME_NET"
 
-snort_fedora_package: 'https://www.snort.org/downloads/snort/snort-{{ snort_version }}-1.f25.x86_64.rpm'
-snort_fedora_daq_package: 'https://www.snort.org/downloads/snort/daq-{{ snort_daq_version }}-1.f21.x86_64.rpm'
+snort_fedora_package: "https://www.snort.org/downloads/snort/snort-{{ snort_version }}-1.f29.x86_64.rpm"
+snort_fedora_daq_package: "https://www.snort.org/downloads/archive/snort/daq-{{ snort_daq_version }}-1.f21.x86_64.rpm"
 
 # Define your home_net..if snort_external_net is any then set this to any
 snort_home_net: 192.168.0.0/16
 
 # Defines snort interface to listen on
-snort_interface: '{{ ansible_default_ipv4.interface }}'
+snort_interface: "{{ ansible_default_ipv4.interface|default(ansible_interfaces|snort_interface) }}"
 
 snort_oinkmaster_dl_package: oinkmaster-2.0.tar.gz
 snort_oinkmaster_dl_url: http://prdownloads.sourceforge.net/oinkmaster
 snort_oinkmaster_rules_url: http://rules.emergingthreats.net/open/suricata/emerging.rules.tar.gz
 
 # Define additional snort options to pass to startup
-snort_options: ''
+snort_options: ""
 
 # Defines if alerts should be sent to syslog
 snort_output_syslog: false
 
 snort_preproc_rule_path: /etc/snort/preproc_rules
 
-snort_preproc_rules: []
+snort_preproc_rules:
+  []
   #- preprocessor.rules
   #- decoder.rules
   #- sensitive-data.rules
@@ -218,18 +240,18 @@ snort_redhat_prereqs:
   - tcpdump
   - wget
 
-snort_redhat_daq_package: 'https://www.snort.org/downloads/snort/daq-{{ snort_daq_version }}-1.centos7.x86_64.rpm'
-snort_redhat_package: 'https://www.snort.org/downloads/snort/snort-{{ snort_version }}-1.centos7.x86_64.rpm'
+snort_redhat_daq_package: "https://www.snort.org/downloads/archive/snort/daq-{{ snort_daq_version }}-1.centos7.x86_64.rpm"
+snort_redhat_package: "https://www.snort.org/downloads/snort/snort-{{ snort_version }}-1.centos7.x86_64.rpm"
 
 # Defines rules downloaded from emerging threats using oinkmaster
 snort_redhat_rules:
   - community-rules/community.rules
-#  - botcc.portgrouped.rules
+  #  - botcc.portgrouped.rules
   - botcc.rules
-#  - ciarmy.rules
+  #  - ciarmy.rules
   - compromised.rules
-#  - decoder-events.rules
-#  - drop.rules
+  #  - decoder-events.rules
+  #  - drop.rules
   - dshield.rules
 #  - emerging-activex.rules
 #  - emerging-attack_response.rules
@@ -286,5 +308,5 @@ snort_send_stats: true
 snort_src_dir: /opt/snort_src
 snort_startup: boot
 snort_stats_threshold: 1
-snort_version: 2.9.11.1
+snort_version: 2.9.13
 snort_whitelist_path: /etc/snort/rules

@@ -1,19 +1,11 @@
 ---
 - name: barnyard2 | installing pre-reqs
   apt:
-    name: "{{ item }}"
+    name: "{{ snort_barnyard2_debian_pre_reqs }}"
     state: present
   become: true
-  with_items:
-    - autoconf
-    - bison
-    - flex
-    - git
-    - libdumbnet-dev
-    - libpcap-dev
-    - libpcre3-dev
-    - libtool
-    - mysql-client
+  register: result
+  until: result is successful
   when: ansible_os_family == "Debian"
 
 - name: barnyard2 | installing add'l pre-reqs
@@ -21,6 +13,8 @@
     name: libmariadbclient-dev
     state: present
   become: true
+  register: result
+  until: result is successful
   when: snort_barnyard2_db_type == "mariadb"
 
 - name: barnyard2 | installing add'l pre-reqs
@@ -28,6 +22,8 @@
     name: libmysqlclient-dev
     state: present
   become: true
+  register: result
+  until: result is successful
   when: snort_barnyard2_db_type == "mysql"
 
 - name: barnyard2 | ensuring snort_src_dir exists
@@ -73,7 +69,6 @@
   args:
     chdir: "{{ snort_src_dir }}/barnyard2"
     creates: /usr/local/bin/barnyard2
-  become: true
   with_items:
     - ./autogen.sh
     - ./configure --with-mysql --with-mysql-libraries=/usr/lib/
@@ -89,7 +84,6 @@
   args:
     chdir: "{{ snort_src_dir }}/barnyard2"
     creates: /usr/local/bin/barnyard2
-  become: true
   with_items:
     - ./autogen.sh
     - ./configure --with-mysql --with-mysql-libraries=/usr/lib/{{ ansible_machine }}-linux-gnu/

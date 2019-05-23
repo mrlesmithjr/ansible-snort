@@ -6,14 +6,6 @@ Installs and configures [Snort IDS](https://snort.org/)
 
 None
 
-## Vagrant
-
-Spin up Environment under Vagrant to test.
-
-```bash
-vagrant up
-```
-
 ## Role Variables
 
 [defaults/main.yml](defaults/main.yml)
