@@ -30,6 +30,7 @@ galaxy_info:
         - xenial
     - name: Debian
       versions:
+        - buster
         - jessie
         - wheezy
         - stretch
