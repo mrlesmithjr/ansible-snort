@@ -13,9 +13,10 @@
   register: result
   until: result is successful
   when: >
-    ansible_distribution != "Ubuntu" or
     (ansible_distribution == "Ubuntu" and
-    ansible_distribution_major_version < "18")
+    ansible_distribution_major_version < "18") or
+    (ansible_distribution == "Debian" and
+    ansible_distribution_major_version < "10")
 
 - name: debian | Installing iproute2
   apt:
@@ -25,8 +26,10 @@
   register: result
   until: result is successful
   when: >
-    ansible_distribution == "Ubuntu" and
-    ansible_distribution_major_version >= "18"
+    (ansible_distribution == "Ubuntu" and
+    ansible_distribution_major_version >= "18") or
+    (ansible_distribution == "Debian" and
+    ansible_distribution_major_version >= "10")
 
 - name: debian | installing pre-reqs
   apt:
