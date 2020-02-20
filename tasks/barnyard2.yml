@@ -62,6 +62,7 @@
     repo: https://github.com/firnsy/barnyard2
     dest: "{{ snort_src_dir }}/barnyard2"
     update: false
+    version: "{{ snort_barnyard2_git_tag }}"
   become: true
 
 - name: barnyard2 | building barnyard2
@@ -170,7 +171,7 @@
   register: db_schema_import
   when: not db_schema_imported.stat.exists
 
-- name: barnyard2 | marking MySQL DB schema as imported
+- name: barnyard2 | marking MySQL DB schema as imported # noqa 503
   file:
     path: /var/log/.db_schema_imported
     state: touch

@@ -27,6 +27,8 @@ snort_barnyard2_debian_pre_reqs:
 # Defines if barnyard2 should be installed and configured
 snort_barnyard2_enable: false
 
+snort_barnyard2_git_tag: v2-1.13
+
 snort_barnyard2_logdir: /var/log/snort
 snort_barnyard2_waldo_file: "{{ snort_barnyard2_logdir }}/barnyard2.waldo"
 snort_community_rules_package: community-rules.tar.gz
