@@ -1,8 +1,7 @@
 ---
 galaxy_info:
   author: Larry Smith Jr.
-  description: Installs and configures Snort IDS https://snort.org/
-
+  description: Ansible role to install/configure Snort IDS
   license: MIT
   min_ansible_version: 1.2
 
