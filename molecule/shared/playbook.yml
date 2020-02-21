@@ -2,7 +2,7 @@
 - name: Converge
   hosts: all
   vars:
-    - snort_barnyard2_enable: true
+    - snort_barnyard2_enable: false
   roles:
     - role: ansible-mysql
       when:

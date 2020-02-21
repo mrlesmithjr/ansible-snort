@@ -242,7 +242,7 @@ snort_redhat_prereqs:
   - tcpdump
   - wget
 
-snort_redhat_daq_package: "https://www.snort.org/downloads/archive/snort/daq-{{ snort_daq_version }}-1.centos7.x86_64.rpm"
+snort_redhat_daq_package: "http://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/d/daq-{{ snort_daq_version }}-1.el7.x86_64.rpm"
 snort_redhat_package: "https://www.snort.org/downloads/snort/snort-{{ snort_version }}-1.centos7.x86_64.rpm"
 
 # Defines rules downloaded from emerging threats using oinkmaster
@@ -310,5 +310,5 @@ snort_send_stats: true
 snort_src_dir: /opt/snort_src
 snort_startup: boot
 snort_stats_threshold: 1
-snort_version: 2.9.13
+snort_version: 2.9.15.1
 snort_whitelist_path: /etc/snort/rules
