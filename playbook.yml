@@ -2,10 +2,14 @@
 - name: Example Playbook
   hosts: all
   vars:
-    - snort_barnyard2_enable: true
-  roles:
-    - role: ansible-mysql
+    snort_barnyard2_enable: true
+  tasks:
+    - name: Include ansible-mysql
+      include_role:
+        name: ansible-mysql
       when:
         - snort_barnyard2_enable is defined
         - snort_barnyard2_enable|bool
-    - role: ansible-snort
+    - name: Include ansible-snort
+      include_role:
+        name: ansible-snort
