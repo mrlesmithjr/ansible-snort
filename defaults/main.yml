@@ -235,6 +235,7 @@ snort_preproc_rules:
   #- sensitive-data.rules
 
 snort_redhat_prereqs:
+  - cronie
   # libpcap-devel
   - libdnet
   - libpcap-devel
