@@ -15,7 +15,9 @@
   become: true
   register: result
   until: result is successful
-  when: snort_barnyard2_db_type == "mariadb"
+  when:
+    - ansible_os_family == "Debian"
+    - snort_barnyard2_db_type == "mariadb"
 
 - name: barnyard2 | installing add'l pre-reqs
   apt:
@@ -24,7 +26,9 @@
   become: true
   register: result
   until: result is successful
-  when: snort_barnyard2_db_type == "mysql"
+  when:
+    - ansible_os_family == "Debian"
+    - snort_barnyard2_db_type == "mysql"
 
 - name: barnyard2 | ensuring snort_src_dir exists
   file:
